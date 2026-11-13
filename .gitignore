@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+
+# Compiled output
+build/
+*.o
