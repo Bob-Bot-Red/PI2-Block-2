@@ -1,0 +1,27 @@
+#ifndef PKW_H
+#define PKW_H
+#include <limits>
+
+#include "Fahrzeug.h"
+
+class PKW : public Fahrzeug
+{
+public:
+    PKW();
+    PKW(const std::string &sName, const double dMaxGeschwindigkeit, const double dVerbrauch, const double dTankvolumen = 55.0);
+
+    virtual ~PKW();
+
+    void vAusgeben(std::ostream &out) const override;
+    void vSimulieren() override;
+    double dTanken(double dMenge) override;
+
+    PKW &operator=(const PKW &rhs);
+
+private:
+    double p_dVerbrauch = 0.0;
+    double p_dTankvolumen = 0.0;
+    double p_dTankinhalt = 0.0;
+};
+
+#endif
