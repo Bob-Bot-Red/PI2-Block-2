@@ -16,8 +16,8 @@ public:
     virtual void vSimulieren() = 0;
 
     int getID() const;
-    const std::string &getName();
-    bool operator==(const Simulationsobjekt &rhs);
+    const std::string &getName() const;
+    bool operator==(const Simulationsobjekt &rhs) const;
     Simulationsobjekt(const Simulationsobjekt &) = delete;
     Simulationsobjekt &operator=(const Simulationsobjekt &rhs);
     

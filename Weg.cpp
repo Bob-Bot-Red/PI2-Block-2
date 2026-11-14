@@ -2,6 +2,11 @@
 #include "Fahrzeug.h"
 #include <iomanip>
 
+Weg::Weg()
+    : Weg("", 0.0, Tempolimit::Autobahn)
+{
+}
+
 Weg::Weg(const std::string &sName, double dLaenge, Tempolimit eTempolimit)
     : Simulationsobjekt(sName),
       p_dLaenge(dLaenge), p_eTempolimit(eTempolimit)
@@ -40,10 +45,10 @@ double Weg::getTempolimit() const
 void Weg::vKopf()
 {
     std::cout << std::resetiosflags(std::ios::right) << std::setiosflags(std::ios::left)
-        << std::setw(5) << "ID"
-        << std::setw(15) << "Name"
-        << std::setw(15) << "Laenge"
-        << std::setw(20) << "Fahrzeuge" << std::endl
-        << std::setfill('-') << std::setw(55) << "" << std::endl
-        << std::setfill(' ');
+              << std::setw(5) << "ID"
+              << std::setw(15) << "Name"
+              << std::setw(15) << "Laenge"
+              << std::setw(20) << "Fahrzeuge" << std::endl
+              << std::setfill('-') << std::setw(55) << "" << std::endl
+              << std::setfill(' ');
 }

@@ -34,12 +34,12 @@ int Simulationsobjekt::getID() const
     return p_iID;
 }
 
-const std::string &Simulationsobjekt::getName()
+const std::string &Simulationsobjekt::getName() const
 {
     return p_sName;
 }
 
-bool Simulationsobjekt::operator==(const Simulationsobjekt &rhs)
+bool Simulationsobjekt::operator==(const Simulationsobjekt &rhs) const
 {
     return this->p_iID == rhs.p_iID;
 }
