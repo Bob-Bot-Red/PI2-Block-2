@@ -210,20 +210,37 @@ void vAufgabe_4()
     Weg::vKopf();
     Weg erster("Name", 22.0, Tempolimit::Autobahn);
     erster.vSimulieren();
-    std::cout << erster;
+    std::cout << 0;
 }
 
+void vAufgabe_5()
+{
+    Weg Autobahn1("Ernst", 200.0, Tempolimit::Autobahn);
+
+    Autobahn1.Annahme(std::make_unique<PKW>("Audi", 80.0, 6.0));
+    Autobahn1.Annahme(std::make_unique<PKW>("Mercedes", 0.0, 68.0));
+    Autobahn1.Annahme(std::make_unique<Fahrrad>("lol", 35.0));
+
+    for (int i = 0; i < 3; i++)
+    {
+        dGlobaleZeit = i * 0.5;
+        Autobahn1.vSimulieren();
+        std::cout << "\n Globale" << dGlobaleZeit << std::endl;
+        std::cout << Autobahn1 << "\n" << std::endl;
+
+    }
+}
 int main()
 {
-    /* 
+    /*
     vAufgabe_1();
     vAufgabe_1a();
     vAufgabe_AB1();
     vAufgabe_2();
     vAufgabe_3();
+    vAufgabe_4();
     */
-   vAufgabe_4();
+   vAufgabe_5();
 
-   
-   return 0;
+    return 0;
 }

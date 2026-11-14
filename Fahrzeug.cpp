@@ -34,7 +34,7 @@ void Fahrzeug::vKopf()
               << std::setw(20) << "AbschnittStrecke"
               << std::setw(20) << "GesamtVerbrauch"
               << std::setw(15) << "Tankinhalt" << std::endl
-              << std::setfill('-') << std::setw(110) << "" << std::endl
+              << std::setfill('-') << std::setw(1301) << "" << std::endl
               << std::setfill(' ');
 }
 
@@ -51,13 +51,26 @@ void Fahrzeug::vAusgeben(std::ostream &out) const
 void Fahrzeug::vSimulieren()
 {
     double dZeitDifferenz = dGlobaleZeit - p_dZeit;
-    if (dZeitDifferenz > 0.0)
+    
+    if (dZeitDifferenz <= 0.0)
     {
-        p_dGesamtZeit += dZeitDifferenz;
-        double dTeilstrecke = p_pVerhalten->dStrecke(*this, dZeitDifferenz);
-        p_dGesamtStrecke += dTeilstrecke;
-        p_dZeit = dGlobaleZeit;
+        return;
     }
+    double dTeilStrecke;
+    if (p_pVerhalten)
+    {
+        
+        dTeilStrecke = p_pVerhalten->dStrecke(*this, dZeitDifferenz);
+        p_dAbschnittStrecke += dTeilStrecke;
+    }
+    else
+    {
+        dTeilStrecke = dGeschwindigkeit() * dZeitDifferenz;
+    }
+
+    p_dGesamtStrecke += dTeilStrecke;
+    p_dGesamtZeit += dZeitDifferenz;
+    p_dZeit = dGlobaleZeit;
 }
 
 double Fahrzeug::dTanken(const double dMenge)
@@ -90,8 +103,9 @@ double Fahrzeug::getMaxGesch()
     return p_dMaxGeschwindigkeit;
 }
 
-void Fahrzeug::vNeueStrecke(Weg &Weg)
+void Fahrzeug::vNeueStrecke(Weg &weg)
 {
 
-    p_pVerhalten = std::make_unique<>(Weg);
+    p_pVerhalten = std::make_unique<Verhalten>(weg);
+    p_dAbschnittStrecke = 0.0;
 }

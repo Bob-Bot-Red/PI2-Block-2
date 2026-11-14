@@ -8,9 +8,12 @@ class Verhalten
 {
 public:
     Verhalten(Weg &pWeg);
-     double dStrecke(Fahrzeug& aFzg, double dZeitIntervall) const;
+    virtual ~Verhalten();
+    double dStrecke(Fahrzeug &aFzg, double dZeitIntervall) const;
+    Weg &getWeg() const;
+
 private:
-Weg& p_pWeg;
+    Weg &p_pWeg;
 };
 
 #endif

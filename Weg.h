@@ -21,7 +21,7 @@ public:
     virtual void vSimulieren() override;
     virtual void vAusgeben(std::ostream &out) const override;
     double getTempolimit() const;
-
+    void Annahme(std::unique_ptr<Fahrzeug> fahrzeug);
 
 protected:
 private:

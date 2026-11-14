@@ -1,6 +1,7 @@
 #include "Weg.h"
 #include "Fahrzeug.h"
 #include <iomanip>
+#include <utility>
 
 Weg::Weg()
     : Weg("", 0.0, Tempolimit::Autobahn)
@@ -51,4 +52,15 @@ void Weg::vKopf()
               << std::setw(20) << "Fahrzeuge" << std::endl
               << std::setfill('-') << std::setw(55) << "" << std::endl
               << std::setfill(' ');
+}
+
+void Weg::Annahme(std::unique_ptr<Fahrzeug> fahrzeug)
+{
+    if (!fahrzeug)
+    {
+        return;
+    }
+    else
+        fahrzeug->vNeueStrecke(*this);
+    p_pFahrzeuge.push_back(std::move(fahrzeug));
 }
