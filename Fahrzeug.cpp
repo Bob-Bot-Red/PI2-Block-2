@@ -1,7 +1,5 @@
 #include "Fahrzeug.h"
 #include <iomanip>
-#include "Verhalten.h"
-
 
 extern double dGlobaleZeit;
 
@@ -33,6 +31,7 @@ void Fahrzeug::vKopf()
               << std::setw(20) << "MaxGeschwindigkeit"
               << std::setw(20) << "GesamtStrecke"
               << std::setw(20) << "GesamtZeit"
+              << std::setw(20) << "AbschnittStrecke"
               << std::setw(20) << "GesamtVerbrauch"
               << std::setw(15) << "Tankinhalt" << std::endl
               << std::setfill('-') << std::setw(110) << "" << std::endl
@@ -45,7 +44,8 @@ void Fahrzeug::vAusgeben(std::ostream &out) const
 
     out << std::setw(20) << p_dMaxGeschwindigkeit
         << std::setw(20) << p_dGesamtStrecke
-        << std::setw(20) << p_dGesamtZeit;
+        << std::setw(20) << p_dGesamtZeit
+        << std::setw(20) << p_dAbschnittStrecke;
 }
 
 void Fahrzeug::vSimulieren()
@@ -90,7 +90,8 @@ double Fahrzeug::getMaxGesch()
     return p_dMaxGeschwindigkeit;
 }
 
-void Fahrzeug::vNeueStrecke(Weg& Weg)
+void Fahrzeug::vNeueStrecke(Weg &Weg)
 {
 
+    p_pVerhalten = std::make_unique<>(Weg);
 }
