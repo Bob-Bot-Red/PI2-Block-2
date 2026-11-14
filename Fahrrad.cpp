@@ -1,4 +1,5 @@
 #include "Fahrrad.h"
+#include "Simulationsobjekt.h"
 #include <cmath>
 #include <algorithm>
 
@@ -7,8 +8,9 @@ Fahrrad::Fahrrad() : Fahrzeug()
 }
 
 Fahrrad::Fahrrad(const std::string &sName, const double dMaxGeschwindkeit)
-    : Fahrzeug(sName, dMaxGeschwindkeit)
+    : Simulationsobjekt(sName)
 {
+
 }
 
 Fahrrad::~Fahrrad()
