@@ -10,7 +10,7 @@ public:
     Fahrrad();
     Fahrrad(const std::string &sName, const double dMaxGeschwindkeit);
     virtual ~Fahrrad();
-    double dGeschwindigkeit() const override;
+    double dGeschwindigkeit() override;
 
 private:
 };

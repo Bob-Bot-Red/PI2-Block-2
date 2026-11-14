@@ -8,9 +8,9 @@ Fahrrad::Fahrrad() : Fahrzeug()
 }
 
 Fahrrad::Fahrrad(const std::string &sName, const double dMaxGeschwindkeit)
-    : Simulationsobjekt(sName)
+    : Fahrzeug(sName),
+    p_dMaxGeschwindigkeit((dMaxGeschwindkeit > 0.0) ? dMaxGeschwindkeit : 0.0)
 {
-
 }
 
 Fahrrad::~Fahrrad()

@@ -12,9 +12,9 @@ Fahrzeug::Fahrzeug(const std::string &sName)
 {
 }
 
-Fahrzeug::Fahrzeug(const std::string &sName, const double p_dMaxGeschwindigkeit)
+Fahrzeug::Fahrzeug(const std::string &sName, const double dMaxGeschwindigkeit)
     : Simulationsobjekt(sName),
-      p_dMaxGeschwindigkeit((p_dMaxGeschwindigkeit > 0.0) ? p_dMaxGeschwindigkeit : 0.0)
+      p_dMaxGeschwindigkeit((dMaxGeschwindigkeit > 0.0) ? dMaxGeschwindigkeit : 0.0)
 {
     std::cout << "Fahrzeug " << sName << "mit Geschw" << p_dMaxGeschwindigkeit << "wird erstellt" << std::endl;
 }
