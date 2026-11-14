@@ -217,13 +217,13 @@ void vAufgabe_5()
 {
     Weg Autobahn1("Ernst", 200.0, Tempolimit::Autobahn);
 
-    Autobahn1.Annahme(std::make_unique<PKW>("Audi", 80.0, 6.0));
-    Autobahn1.Annahme(std::make_unique<PKW>("Mercedes", 100.0, 68.0));
-    Autobahn1.Annahme(std::make_unique<Fahrrad>("lol", 35.0));
+    Autobahn1.vAnnahme(std::make_unique<PKW>("Audi", 80.0, 6.0));
+    Autobahn1.vAnnahme(std::make_unique<PKW>("Mercedes", 100.0, 68.0));
+    Autobahn1.vAnnahme(std::make_unique<Fahrrad>("lol", 35.0));
 
     for (int i = 0; i < 3; i++)
     {
-        dGlobaleZeit = i * 0.5;
+        dGlobaleZeit = i + 0.5;
         Autobahn1.vSimulieren();
         std::cout << "\n Globale" << dGlobaleZeit << std::endl;
         std::cout << Autobahn1 << "\n" << std::endl;

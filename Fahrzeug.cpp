@@ -106,6 +106,13 @@ double Fahrzeug::getMaxGesch()
 void Fahrzeug::vNeueStrecke(Weg &weg)
 {
 
-    p_pVerhalten = std::make_unique<Verhalten>(weg);
+    p_pVerhalten = std::make_unique<Fahren>(weg);
+    p_dAbschnittStrecke = 0.0;
+}
+
+void Fahrzeug::vNeueStrecke(Weg &weg, double dStartZeitpunkt)
+{
+
+    p_pVerhalten = std::make_unique<Parken>(weg, dStartZeitpunkt);
     p_dAbschnittStrecke = 0.0;
 }

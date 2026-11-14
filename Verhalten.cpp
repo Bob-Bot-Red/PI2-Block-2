@@ -10,9 +10,6 @@ Verhalten::~Verhalten()
 {
 }
 
-double Verhalten::dStrecke(Fahrzeug &aFzg, double dZeitIntervall) const
-{
-}
 
 Weg &Verhalten::getWeg() const
 {

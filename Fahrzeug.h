@@ -6,6 +6,8 @@
 #include <memory>
 #include <list>
 #include "Verhalten.h"
+#include "Fahren.h"
+#include "Parken.h"
 
 class Fahrzeug : public Simulationsobjekt
 {
@@ -25,6 +27,7 @@ public:
     Fahrzeug &operator=(const Fahrzeug &rhs);
     double getMaxGesch();
     void vNeueStrecke(Weg &Weg);
+    void vNeueStrecke(Weg &Weg, double dStartZeitpunkt);
 
 protected:
     double p_dMaxGeschwindigkeit = 0.0;
