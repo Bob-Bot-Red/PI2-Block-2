@@ -23,7 +23,7 @@ public:
     Fahrzeug &operator=(const Fahrzeug &rhs);
 
 protected:
-    double p_dMaxGeschwindigkeit;
+    double p_dMaxGeschwindigkeit = 0.0;
     double p_dGesamtStrecke = 0.0;
     double p_dGesamtZeit = 0.0;
 
