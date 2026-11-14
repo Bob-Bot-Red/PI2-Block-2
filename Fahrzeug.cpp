@@ -29,8 +29,8 @@ void Fahrzeug::vKopf()
               << std::setw(5) << "ID"
               << std::setw(15) << "Name"
               << std::setw(20) << "MaxGeschwindigkeit"
-              << std::setw(20) << "AktGeschwindkeit"
               << std::setw(20) << "GesamtStrecke"
+              << std::setw(20) << "GesamtZeit"
               << std::setw(20) << "GesamtVerbrauch"
               << std::setw(15) << "Tankinhalt" << std::endl
               << std::setfill('-') << std::setw(110) << "" << std::endl

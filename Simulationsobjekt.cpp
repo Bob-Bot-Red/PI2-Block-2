@@ -24,7 +24,7 @@ Simulationsobjekt::~Simulationsobjekt()
 
 void Simulationsobjekt::vAusgeben(std::ostream &out) const
 {
-    std::cout << std::resetiosflags(std::ios::right) << std::setiosflags(std::ios::left)
+    out << std::resetiosflags(std::ios::right) << std::setiosflags(std::ios::left)
               << std::setw(5) << p_iID
               << std::setw(15) << p_sName;
 }
