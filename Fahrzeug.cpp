@@ -1,5 +1,7 @@
 #include "Fahrzeug.h"
 #include <iomanip>
+#include "Verhalten.h"
+
 
 extern double dGlobaleZeit;
 
@@ -52,6 +54,7 @@ void Fahrzeug::vSimulieren()
     if (dZeitDifferenz > 0.0)
     {
         p_dGesamtZeit += dZeitDifferenz;
+        double dTeilstrecke = p_pVerhalten->dStrecke(*this, dZeitDifferenz);
         p_dGesamtStrecke += dGeschwindigkeit() * dZeitDifferenz;
         p_dZeit = dGlobaleZeit;
     }
@@ -80,4 +83,9 @@ Fahrzeug &Fahrzeug::operator=(const Fahrzeug &rhs)
         p_dMaxGeschwindigkeit = rhs.p_dMaxGeschwindigkeit;
     }
     return *this;
+}
+
+double Fahrzeug::getMaxGesch()
+{
+    return p_dMaxGeschwindigkeit;
 }
