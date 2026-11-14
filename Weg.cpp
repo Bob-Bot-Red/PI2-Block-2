@@ -64,3 +64,12 @@ void Weg::Annahme(std::unique_ptr<Fahrzeug> fahrzeug)
         fahrzeug->vNeueStrecke(*this);
     p_pFahrzeuge.push_back(std::move(fahrzeug));
 }
+
+void Weg::vFahrzeugeAusgeben() const
+{
+    Fahrzeug::vKopf();
+    for(const auto& Fahrzeuge: p_pFahrzeuge)
+    {
+        std::cout << *Fahrzeuge << "\n" << std::endl;
+    }
+}

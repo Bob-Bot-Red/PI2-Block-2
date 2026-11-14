@@ -16,7 +16,7 @@ Fahrzeug::Fahrzeug(const std::string &sName, const double dMaxGeschwindigkeit)
     : Simulationsobjekt(sName),
       p_dMaxGeschwindigkeit((dMaxGeschwindigkeit > 0.0) ? dMaxGeschwindigkeit : 0.0)
 {
-    std::cout << "Fahrzeug " << sName << "mit Geschw" << p_dMaxGeschwindigkeit << "wird erstellt" << std::endl;
+    std::cout << " Fahrzeug " << sName << " mit Geschw " << p_dMaxGeschwindigkeit << " wird erstellt " << std::endl;
 }
 
 Fahrzeug::~Fahrzeug()
@@ -34,7 +34,7 @@ void Fahrzeug::vKopf()
               << std::setw(20) << "AbschnittStrecke"
               << std::setw(20) << "GesamtVerbrauch"
               << std::setw(15) << "Tankinhalt" << std::endl
-              << std::setfill('-') << std::setw(1301) << "" << std::endl
+              << std::setfill('-') << std::setw(130) << "" << std::endl
               << std::setfill(' ');
 }
 

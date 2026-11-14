@@ -13,8 +13,8 @@ Simulationsobjekt::Simulationsobjekt(const std::string &sName)
     : p_sName(sName),
       p_iID(++p_iMaxID)
 {
-    std::cout << "Fahrzeug " << p_sName << std::endl
-              << "name: " << p_iID << std::endl;
+    std::cout << "Fahrzeug " << p_sName << " " << std::endl
+              << "name: " << p_iID << " " << std::endl;
 }
 
 Simulationsobjekt::~Simulationsobjekt()
