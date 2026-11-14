@@ -55,7 +55,7 @@ void Fahrzeug::vSimulieren()
     {
         p_dGesamtZeit += dZeitDifferenz;
         double dTeilstrecke = p_pVerhalten->dStrecke(*this, dZeitDifferenz);
-        p_dGesamtStrecke += dGeschwindigkeit() * dZeitDifferenz;
+        p_dGesamtStrecke += dTeilstrecke;
         p_dZeit = dGlobaleZeit;
     }
 }
@@ -88,4 +88,9 @@ Fahrzeug &Fahrzeug::operator=(const Fahrzeug &rhs)
 double Fahrzeug::getMaxGesch()
 {
     return p_dMaxGeschwindigkeit;
+}
+
+void Fahrzeug::vNeueStrecke(Weg& Weg)
+{
+
 }

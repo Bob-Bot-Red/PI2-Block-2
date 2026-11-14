@@ -24,7 +24,7 @@ public:
     bool operator<(const Fahrzeug &rhs) const;
     Fahrzeug &operator=(const Fahrzeug &rhs);
     double getMaxGesch();
-    Fahrzeug::vNeueStrecke(Weg&)
+    void vNeueStrecke(Weg& Weg);
 
 protected:
     double p_dMaxGeschwindigkeit = 0.0;
