@@ -29,7 +29,7 @@ void Weg::vSimulieren()
         }
         catch(Fahrausnahme& ausnahme)
         {
-            ausnahme.vArbeiten();
+            ausnahme.vBearbeiten();
         }
     }
 }
@@ -70,7 +70,7 @@ void Weg::vAnnahme(std::unique_ptr<Fahrzeug> fahrzeug)
     }
     else
         fahrzeug->vNeueStrecke(*this);
-    p_pFahrzeuge.push_front(std::move(fahrzeug));
+    p_pFahrzeuge.push_back(std::move(fahrzeug));
 }
 
 void Weg::vAnnahme(std::unique_ptr<Fahrzeug> fahrzeug, double dStartZeitpunkt)

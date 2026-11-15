@@ -8,7 +8,7 @@ Streckenende::Streckenende(Fahrzeug &fahrzeug, Weg &weg)
 }
 
 
-void Streckenende::vArbeiten()
+void Streckenende::vBearbeiten()
 {
 std::cout << "Streckenende: Fahrzeug " << p_pFahrzeug.getName() 
     << " auf Weg " << p_pWeg.getName() << std::endl;

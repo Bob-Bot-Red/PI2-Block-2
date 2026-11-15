@@ -8,7 +8,7 @@ Losfahren::Losfahren(Fahrzeug &fahrzeug, Weg &weg)
 {
 }
 
-void Losfahren::vArbeiten()
+void Losfahren::vBearbeiten()
 {
     std::cout << "Losfahren: Fahrzeug " << p_pFahrzeug.getName() 
     << " auf Weg " << p_pWeg.getName() << std::endl;

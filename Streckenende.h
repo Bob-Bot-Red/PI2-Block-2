@@ -9,7 +9,7 @@ public:
 Streckenende(Fahrzeug &fahrzeug, Weg &weg);
 
 virtual ~Streckenende() override = default;
-    void vArbeiten() override;
+    void vBearbeiten() override;
 };
 
 #endif

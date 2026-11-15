@@ -28,6 +28,7 @@ public:
     double getMaxGesch();
     void vNeueStrecke(Weg &Weg);
     void vNeueStrecke(Weg &Weg, double dStartZeitpunkt);
+    double getAbschnittstrecke() const;
 
 protected:
     double p_dMaxGeschwindigkeit = 0.0;
@@ -35,7 +36,6 @@ protected:
     double p_dGesamtZeit = 0.0;
     double p_dAbschnittStrecke = 0.0;
     std::unique_ptr<Verhalten> p_pVerhalten;
-
 };
 
 #endif // FAHRZEUG_H , Ende der Schreibweise hier, damit der Präprozessor weiß,

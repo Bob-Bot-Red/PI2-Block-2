@@ -23,6 +23,4 @@ double Fahren::dStrecke(Fahrzeug &aFzg, double dZeitIntervall) const
         return dRest;
     }
     return dMoeglicheStrecke;
-
-return aFzg.dGeschwindigkeit() * dZeitIntervall;
 }

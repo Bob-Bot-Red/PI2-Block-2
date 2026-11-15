@@ -11,7 +11,6 @@ class Parken : public Verhalten
 
     private:
     double p_dStartZeitpunkt;
-    mutable bool p_bStartmeldungAusgegeben = false;
 
 };
 

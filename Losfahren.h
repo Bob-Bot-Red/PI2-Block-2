@@ -9,7 +9,7 @@ class Losfahren : public Fahrausnahme
     //Fahrausnahme();
     Losfahren(Fahrzeug& fahrzeug, Weg& weg);
     ~Losfahren() override = default;
-    void vArbeiten() override;
+    void vBearbeiten() override;
 
 };
 

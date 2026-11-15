@@ -69,7 +69,7 @@ void Fahrzeug::vSimulieren()
     {
         dTeilStrecke = dGeschwindigkeit() * dZeitDifferenz;
     }
-    
+
     p_dGesamtStrecke += dTeilStrecke;
     p_dGesamtZeit += dZeitDifferenz;
     p_dZeit = dGlobaleZeit;
@@ -119,7 +119,7 @@ void Fahrzeug::vNeueStrecke(Weg &weg, double dStartZeitpunkt)
     p_dAbschnittStrecke = 0.0;
 }
 
- double Fahrzeug::getAbschnittstrecke() const
-    {
-return p_dAbschnittStrecke;
-    }
+double Fahrzeug::getAbschnittstrecke() const
+{
+    return p_dAbschnittStrecke;
+}
