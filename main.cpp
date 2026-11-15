@@ -293,7 +293,8 @@ void vAufgabe_6()
             autobahn.vSimulieren();
 
             Weg::vKopf();
-            std::cout << stadt << '\n' << autobahn << '\n';
+            std::cout << stadt << '\n'
+                      << autobahn << '\n';
 
             std::cout << "\nFahrzeuge auf Stadt\n";
             stadt.vFahrzeugeAusgeben();
@@ -314,6 +315,33 @@ void vAufgabe_6()
     }
 }
 
+void vZwischendurchtest()
+{
+    Weg Autobahn1("Autobahn", 200.0, Tempolimit::Autobahn);
+    Weg Autobahn2("Autobahn", 200.0, Tempolimit::Autobahn);
+    Autobahn1.vAnnahme(std::make_unique<PKW>("Audi", 120.0, 6.0));
+    Autobahn2.vAnnahme(std::make_unique<PKW>("BMW", 120.0, 6.0));
+
+    bInitialisiereGrafik(800, 500);
+    int koordinaten[] = {700, 250, 100, 250};
+    bZeichneStrasse("Autobahn1", "Autobahn2", 100, 2, koordinaten);
+    dGlobaleZeit = 0.0;
+    double dZeitschritte = 0.3;
+    for (double dZeit = 0.0; dZeit <= 10.0 + dEpsilon; dZeit += dZeitschritte)
+    {
+        dGlobaleZeit += dZeit;
+        vSetzeZeit(dGlobaleZeit);
+        Autobahn1.vSimulieren();
+        Autobahn2.vSimulieren();
+        Weg::vKopf();
+        std::cout << Autobahn1 << "›\n" << Autobahn2 << std::endl;
+        Autobahn1.vFahrzeugeAusgeben();        
+        Autobahn2.vFahrzeugeAusgeben();
+        vSleep(100);
+    }
+    vBeendeGrafik();
+}
+
 int main()
 {
     /*
@@ -324,7 +352,8 @@ int main()
     vAufgabe_2();
     vAufgabe_3();
     vAufgabe_4();
-    */
     vAufgabe_6();
+    */
+   vZwischendurchtest();
     return 0;
 }
