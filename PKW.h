@@ -17,6 +17,7 @@ public:
     double dTanken(double dMenge = std::numeric_limits<double>::infinity()) override;
     double dGeschwindigkeit() const override;
     PKW &operator=(const PKW &rhs);
+    virtual void vZeichnenn(Weg &FzgWeg);
 
 private:
     double p_dVerbrauch = 0.0;

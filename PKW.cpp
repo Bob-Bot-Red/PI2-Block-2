@@ -4,6 +4,7 @@
 #include "Weg.h"
 #include <iostream>
 #include <algorithm>
+#include "SimuClient.h"
 
 extern double dGlobaleZeit;
 
@@ -89,4 +90,10 @@ double PKW::dGeschwindigkeit() const
         return p_dMaxGeschwindigkeit;
     }
     return std::min(p_dMaxGeschwindigkeit, p_pVerhalten->getWeg().getTempolimit());
+}
+
+void PKW::vZeichnenn(Weg &FzgWeg)
+{
+    double dRelPosition = p_dAbschnittStrecke / FzgWeg.getLaenge();
+    bZeichnePKW(getName(), FzgWeg.getName(), dRelPosition, dGeschwindigkeit(), p_dTankinhalt);
 }

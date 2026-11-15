@@ -29,6 +29,8 @@ public:
     void vNeueStrecke(Weg &Weg);
     void vNeueStrecke(Weg &Weg, double dStartZeitpunkt);
     double getAbschnittstrecke() const;
+    virtual void vZeichnen(Weg &FzgWeg) = 0;
+
 
 protected:
     double p_dMaxGeschwindigkeit = 0.0;

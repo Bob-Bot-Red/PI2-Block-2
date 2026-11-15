@@ -317,25 +317,26 @@ void vAufgabe_6()
 
 void vZwischendurchtest()
 {
-    Weg Autobahn1("Autobahn", 200.0, Tempolimit::Autobahn);
-    Weg Autobahn2("Autobahn", 200.0, Tempolimit::Autobahn);
+    Weg Autobahn1("Autobahn1", 200.0, Tempolimit::Autobahn);
+    Weg Autobahn2("Autobahn2", 200.0, Tempolimit::Autobahn);
     Autobahn1.vAnnahme(std::make_unique<PKW>("Audi", 120.0, 6.0));
     Autobahn2.vAnnahme(std::make_unique<PKW>("BMW", 120.0, 6.0));
 
     bInitialisiereGrafik(800, 500);
     int koordinaten[] = {700, 250, 100, 250};
     bZeichneStrasse("Autobahn1", "Autobahn2", 100, 2, koordinaten);
-    dGlobaleZeit = 0.0;
     double dZeitschritte = 0.3;
     for (double dZeit = 0.0; dZeit <= 10.0 + dEpsilon; dZeit += dZeitschritte)
     {
-        dGlobaleZeit += dZeit;
+        dGlobaleZeit = dZeit;
         vSetzeZeit(dGlobaleZeit);
         Autobahn1.vSimulieren();
         Autobahn2.vSimulieren();
         Weg::vKopf();
-        std::cout << Autobahn1 << "›\n" << Autobahn2 << std::endl;
+        std::cout << Autobahn1 << "\n" << Autobahn2 << std::endl;
+        bZeichnePKW("Audi", "Autobahn1", 0.5, 120, 55);
         Autobahn1.vFahrzeugeAusgeben();        
+        bZeichnePKW("BMW", "Autobahn2", 0.5, 120, 55);
         Autobahn2.vFahrzeugeAusgeben();
         vSleep(100);
     }
