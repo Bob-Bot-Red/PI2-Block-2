@@ -1,6 +1,9 @@
 #include "PKW.h"
 #include <limits>
 #include <iomanip>
+#include "Weg.h"
+#include <iostream>
+#include <algorithm>
 
 extern double dGlobaleZeit;
 
@@ -77,4 +80,13 @@ PKW &PKW::operator=(const PKW &rhs)
         p_dTankinhalt = rhs.p_dTankinhalt;
     }
     return *this;
+}
+
+double PKW::dGeschwindigkeit() const
+{
+    if (!p_pVerhalten)
+    {
+        return p_dMaxGeschwindigkeit;
+    }
+    return std::min(p_dMaxGeschwindigkeit, p_pVerhalten->getWeg().getTempolimit());
 }

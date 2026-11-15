@@ -15,7 +15,7 @@ public:
     void vAusgeben(std::ostream &out) const override;
     void vSimulieren() override;
     double dTanken(double dMenge = std::numeric_limits<double>::infinity()) override;
-
+    double dGeschwindigkeit() const override;
     PKW &operator=(const PKW &rhs);
 
 private:

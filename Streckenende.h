@@ -6,8 +6,9 @@
 class Streckenende : public Fahrausnahme
 {
 public:
+Streckenende(Fahrzeug &fahrzeug, Weg &weg);
 
-virtual ~Streckenende() override = default
+virtual ~Streckenende() override = default;
     void vArbeiten() override;
 };
 

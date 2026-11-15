@@ -1,6 +1,5 @@
 #include "Fahrzeug.h"
 #include <iomanip>
-
 #include "Streckenende.h"
 
 extern double dGlobaleZeit;

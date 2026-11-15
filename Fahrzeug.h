@@ -34,9 +34,8 @@ protected:
     double p_dGesamtStrecke = 0.0;
     double p_dGesamtZeit = 0.0;
     double p_dAbschnittStrecke = 0.0;
-
-private:
     std::unique_ptr<Verhalten> p_pVerhalten;
+
 };
 
 #endif // FAHRZEUG_H , Ende der Schreibweise hier, damit der Präprozessor weiß,

@@ -20,11 +20,11 @@ public:
     static void vKopf();
     virtual void vSimulieren() override;
     virtual void vAusgeben(std::ostream &out) const override;
-    double getTempolimit() const;
     void vAnnahme(std::unique_ptr<Fahrzeug> fahrzeug);
     void vAnnahme(std::unique_ptr<Fahrzeug> fahrzeug, double dStartZeitpunkt);
     void vFahrzeugeAusgeben() const;
     double getLaenge() const;
+    double getTempolimit() const;
 private:
     double p_dLaenge = 0.0;
     Tempolimit p_eTempolimit;

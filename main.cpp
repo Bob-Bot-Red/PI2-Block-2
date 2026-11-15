@@ -11,7 +11,6 @@
 #include "Fahrrad.h"
 #include "Fahrausnahme.h"
 
-
 using namespace std;
 double dEpsilon = 0.001;
 double dGlobaleZeit = 0.0;
@@ -217,35 +216,73 @@ void vAufgabe_4()
 
 void vAufgabe_5()
 {
-    
+
     {
         Weg Autobahn1("Ernst", 200.0, Tempolimit::Autobahn);
-        
+
         Autobahn1.vAnnahme(std::make_unique<PKW>("Audi", 80.0, 6.0));
         Autobahn1.vAnnahme(std::make_unique<PKW>("Mercedes", 100.0, 68.0));
         Autobahn1.vAnnahme(std::make_unique<Fahrrad>("lol", 35.0));
-        
+
         for (int i = 0; i < 3; i++)
         {
             dGlobaleZeit = i + 0.5;
             try
             {
                 Autobahn1.vSimulieren();
-            } catch (Fahrausnahme &ausnahme)
+            }
+            catch (Fahrausnahme &ausnahme)
             {
                 ausnahme.vArbeiten();
             }
-                std::cout << "\n Globale" << dGlobaleZeit << std::endl;
-                std::cout << Autobahn1 << "\n"
-                          << std::endl;
-                Autobahn1.vFahrzeugeAusgeben();
-            }
+            std::cout << "\n Globale" << dGlobaleZeit << std::endl;
+            std::cout << Autobahn1 << "\n"
+                      << std::endl;
+            Autobahn1.vFahrzeugeAusgeben();
         }
+    }
+}
+
+void vAufgabe_6()
+{
+
+    Weg stadt("Stadt", 100.0, Tempolimit::Innerorts);
+    Weg autobahn("Autobahn", 100.0, Tempolimit::Autobahn);
+
+    stadt.vAnnahme(std::make_unique<PKW>("Audi", 120.0, 6.0));
+    autobahn.vAnnahme(std::make_unique<PKW>("BMW", 120.0, 6.0));
+    
+    stadt.vAnnahme(std::make_unique<PKW>("VW", 100.0, 5.0), 1.0);
+    autobahn.vAnnahme(std::make_unique<PKW>("Opel", 100.0, 5.0), 1.5);
+
+    const double dZeitschritt = 0.25;
+
+    for (int i = 0; i <= 12; ++i)
+    {
+        dGlobaleZeit = i * dZeitschritt;
+
+        std::cout << "\n===== Zeit: " << dGlobaleZeit
+                  << " h =====\n";
+
+        stadt.vSimulieren();
+        autobahn.vSimulieren();
+
+        Weg::vKopf();
+        std::cout << stadt << '\n'
+                  << autobahn << '\n';
+
+        std::cout << "\nFahrzeuge auf dem Stadtweg:\n";
+        stadt.vFahrzeugeAusgeben();
+
+        std::cout << "\nFahrzeuge auf der Autobahn:\n";
+        autobahn.vFahrzeugeAusgeben();
+    }
 }
 
 int main()
 {
     /*
+    vAufgabe_5();
     vAufgabe_1();
     vAufgabe_1a();
     vAufgabe_AB1();
@@ -253,7 +290,6 @@ int main()
     vAufgabe_3();
     vAufgabe_4();
     */
-    vAufgabe_5();
-
+    vAufgabe_6();
     return 0;
 }

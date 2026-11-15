@@ -98,3 +98,4 @@ double Weg::getLaenge() const
 {
     return p_dLaenge;
 }
+
