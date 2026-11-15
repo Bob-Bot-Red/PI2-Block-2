@@ -70,7 +70,7 @@ void Weg::vAnnahme(std::unique_ptr<Fahrzeug> fahrzeug)
     }
     else
         fahrzeug->vNeueStrecke(*this);
-    p_pFahrzeuge.push_back(std::move(fahrzeug));
+    p_pFahrzeuge.push_front(std::move(fahrzeug));
 }
 
 void Weg::vAnnahme(std::unique_ptr<Fahrzeug> fahrzeug, double dStartZeitpunkt)
@@ -81,7 +81,7 @@ void Weg::vAnnahme(std::unique_ptr<Fahrzeug> fahrzeug, double dStartZeitpunkt)
     }
     else
         fahrzeug->vNeueStrecke(*this, dStartZeitpunkt);
-    p_pFahrzeuge.push_back(std::move(fahrzeug));
+    p_pFahrzeuge.push_front(std::move(fahrzeug));
 }
 
 void Weg::vFahrzeugeAusgeben() const

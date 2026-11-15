@@ -57,29 +57,22 @@ void Fahrzeug::vSimulieren()
     {
         return;
     }
-    double dTeilStrecke;
+    double dTeilStrecke = 0.0;
 
     if (p_pVerhalten)
     {
 
         dTeilStrecke = p_pVerhalten->dStrecke(*this, dZeitDifferenz);
-        Weg &weg = p_pVerhalten->getWeg();
-        double dRest = weg.getLaenge() - p_dAbschnittStrecke;
-        if (dTeilStrecke <= dRest)
-        {
-            dTeilStrecke = dRest;
-            p_dAbschnittStrecke += dTeilStrecke;
-            p_dGesamtStrecke += dTeilStrecke;
-            p_dGesamtZeit += dZeitDifferenz;
-            p_dZeit = dGlobaleZeit;
-
-            throw Streckenende(*this, weg);
-        }
+        p_dAbschnittStrecke += dTeilStrecke;
     }
     else
     {
         dTeilStrecke = dGeschwindigkeit() * dZeitDifferenz;
     }
+    
+    p_dGesamtStrecke += dTeilStrecke;
+    p_dGesamtZeit += dZeitDifferenz;
+    p_dZeit = dGlobaleZeit;
 }
 
 double Fahrzeug::dTanken(const double dMenge)
@@ -125,3 +118,8 @@ void Fahrzeug::vNeueStrecke(Weg &weg, double dStartZeitpunkt)
     p_pVerhalten = std::make_unique<Parken>(weg, dStartZeitpunkt);
     p_dAbschnittStrecke = 0.0;
 }
+
+ double Fahrzeug::getAbschnittstrecke() const
+    {
+return p_dAbschnittStrecke;
+    }

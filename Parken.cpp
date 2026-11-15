@@ -13,14 +13,10 @@ Parken::Parken(Weg &weg, double dStartZeitpunkt)
 
 double Parken::dStrecke(Fahrzeug &aFzg, double dZeitIntervall) const
 {
-    if (dGlobaleZeit < p_dStartZeitpunkt)
+    constexpr double dEpsilon = 1e-9;
+    if (dGlobaleZeit + dEpsilon < p_dStartZeitpunkt)
     {
         return 0.0;
     }
-    if (!p_bStartmeldungAusgegeben)
-    {
-        p_bStartmeldungAusgegeben = true;
-        throw Losfahren(aFzg, getWeg());
-    }
-    return aFzg.dGeschwindigkeit() * dZeitIntervall;
+    throw Losfahren(aFzg,getWeg());
 }

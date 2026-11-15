@@ -14,7 +14,7 @@ class Weg : public Simulationsobjekt
 
 public:
     Weg();
-    Weg(const std::string &sName, double dLaenge, Tempolimit eTempolimit);
+    Weg(const std::string &sName, double dLaenge, Tempolimit eTempolimit = Tempolimit::Autobahn);
     virtual ~Weg();
 
     static void vKopf();
