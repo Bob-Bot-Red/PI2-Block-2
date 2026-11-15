@@ -242,6 +242,7 @@ void vAufgabe_5()
             }
         }
 }
+
 int main()
 {
     /*

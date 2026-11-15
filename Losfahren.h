@@ -6,9 +6,9 @@
 class Losfahren : public Fahrausnahme
 {
     public:
-    Fahrausnahme();
-    virtual ~Fahrausnahme();
-
+    //Fahrausnahme();
+    Losfahren(Fahrzeug& fahrzeug, Weg& weg);
+    ~Losfahren() override = default;
     void vArbeiten() override;
 
 };

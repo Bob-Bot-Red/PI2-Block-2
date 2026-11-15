@@ -3,20 +3,19 @@
 
 #include <exception>
 #include <stdexcept>
-#include "Weg.h"
-#include "Fahrzeug.h"
+class Weg;
+class Fahrzeug;
 
 class Fahrausnahme : public std::exception
 {
 public:
     Fahrausnahme(Fahrzeug &fahrzeug, Weg &weg);
     virtual void vArbeiten() = 0;
-    virtual ~Fahrausnahme();
+    virtual ~Fahrausnahme() = default;
 
     protected:
     Fahrzeug &p_pFahrzeug;
     Weg &p_pWeg;
-    private:
 };
 
 #endif

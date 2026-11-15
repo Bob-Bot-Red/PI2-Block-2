@@ -24,8 +24,7 @@ public:
     void vAnnahme(std::unique_ptr<Fahrzeug> fahrzeug);
     void vAnnahme(std::unique_ptr<Fahrzeug> fahrzeug, double dStartZeitpunkt);
     void vFahrzeugeAusgeben() const;
-
-protected:
+    double getLaenge() const;
 private:
     double p_dLaenge = 0.0;
     Tempolimit p_eTempolimit;

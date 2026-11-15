@@ -2,6 +2,7 @@
 #include "Fahrzeug.h"
 #include <iomanip>
 #include <utility>
+#include "Fahrausnahme.h"
 
 Weg::Weg()
     : Weg("", 0.0, Tempolimit::Autobahn)
@@ -22,8 +23,15 @@ void Weg::vSimulieren()
 {
     for (const auto &Autos : p_pFahrzeuge)
     {
+        try
+        {
         Autos->vSimulieren();
-    };
+        }
+        catch(Fahrausnahme& ausnahme)
+        {
+            ausnahme.vArbeiten();
+        }
+    }
 }
 
 void Weg::vAusgeben(std::ostream &out) const
@@ -79,8 +87,14 @@ void Weg::vAnnahme(std::unique_ptr<Fahrzeug> fahrzeug, double dStartZeitpunkt)
 void Weg::vFahrzeugeAusgeben() const
 {
     Fahrzeug::vKopf();
-    for(const auto& Fahrzeuge: p_pFahrzeuge)
+    for (const auto &Fahrzeuge : p_pFahrzeuge)
     {
-        std::cout << *Fahrzeuge << "\n" << std::endl;
+        std::cout << *Fahrzeuge << "\n"
+                  << std::endl;
     }
+}
+
+double Weg::getLaenge() const
+{
+    return p_dLaenge;
 }

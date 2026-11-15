@@ -1,6 +1,8 @@
 #include "Fahrzeug.h"
 #include <iomanip>
 
+#include "Streckenende.h"
+
 extern double dGlobaleZeit;
 
 Fahrzeug::Fahrzeug()
@@ -51,26 +53,34 @@ void Fahrzeug::vAusgeben(std::ostream &out) const
 void Fahrzeug::vSimulieren()
 {
     double dZeitDifferenz = dGlobaleZeit - p_dZeit;
-    
+
     if (dZeitDifferenz <= 0.0)
     {
         return;
     }
     double dTeilStrecke;
+
     if (p_pVerhalten)
     {
-        
+
         dTeilStrecke = p_pVerhalten->dStrecke(*this, dZeitDifferenz);
-        p_dAbschnittStrecke += dTeilStrecke;
+        Weg &weg = p_pVerhalten->getWeg();
+        double dRest = weg.getLaenge() - p_dAbschnittStrecke;
+        if (dTeilStrecke <= dRest)
+        {
+            dTeilStrecke = dRest;
+            p_dAbschnittStrecke += dTeilStrecke;
+            p_dGesamtStrecke += dTeilStrecke;
+            p_dGesamtZeit += dZeitDifferenz;
+            p_dZeit = dGlobaleZeit;
+
+            throw Streckenende(*this, weg);
+        }
     }
     else
     {
         dTeilStrecke = dGeschwindigkeit() * dZeitDifferenz;
     }
-
-    p_dGesamtStrecke += dTeilStrecke;
-    p_dGesamtZeit += dZeitDifferenz;
-    p_dZeit = dGlobaleZeit;
 }
 
 double Fahrzeug::dTanken(const double dMenge)

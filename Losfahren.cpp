@@ -1,11 +1,15 @@
 #include "Losfahren.h"
+#include "Fahrzeug.h"
+#include "Weg.h"
+#include <iostream>
 
-/* Fahrausnahme::Fahrausnahme()
+Losfahren::Losfahren(Fahrzeug &fahrzeug, Weg &weg)
+:Fahrausnahme(fahrzeug, weg)
 {
+}
 
-} */
-
-void Losfahren::vArbeiten() 
+void Losfahren::vArbeiten()
 {
-    std::cout << "Das Fahrzeug " << p_pFahrzeug << " auf dem Weg " << p_pWeg << " hat einen Fehler beim Losfahren" << std::endl;
+    std::cout << "Losfahren: Fahrzeug " << p_pFahrzeug.getName() 
+    << " auf Weg " << p_pWeg.getName() << std::endl;
 }

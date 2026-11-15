@@ -1,5 +1,7 @@
 #include "Parken.h"
 #include "Fahrzeug.h"
+#include "Losfahren.h"
+
 
 extern double dGlobaleZeit;
 
@@ -17,9 +19,8 @@ double Parken::dStrecke(Fahrzeug &aFzg, double dZeitIntervall) const
     }
     if (!p_bStartmeldungAusgegeben)
     {
-        std::cout << "Fahrzeug " << aFzg.getName() 
-        << "Startet bei Zeit " << p_dStartZeitpunkt << std::endl;
         p_bStartmeldungAusgegeben = true;
+        throw Losfahren(aFzg, getWeg());
     }
     return aFzg.dGeschwindigkeit() * dZeitIntervall;
 }
