@@ -5,18 +5,18 @@
 #include <stdexcept>
 #include "Weg.h"
 #include "Fahrzeug.h"
-#include <memory>
 
 class Fahrausnahme : public std::exception
 {
 public:
-    Fahrausnahme(Fahrzeug &fahrzeug, Weg& weg);
+    Fahrausnahme(Fahrzeug &fahrzeug, Weg &weg);
     virtual void vArbeiten() = 0;
     virtual ~Fahrausnahme();
 
+    protected:
+    Fahrzeug &p_pFahrzeug;
+    Weg &p_pWeg;
     private:
-    std::unique_ptr<Fahrzeug> p_aFahrzeug;
-    Weg &p_aWeg;
 };
 
 #endif
