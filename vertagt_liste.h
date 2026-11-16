@@ -30,9 +30,10 @@ namespace vertagt
 
 		void clear()
 		{
-			for (auto it = p_objekte.begin(), it != p_objekte.end(); ++it)
+			for (auto it = p_objekte.begin(); it != p_objekte.end(); ++it)
 			{
-				p_aktionen.push_back(std::make_unique<VErase<T>>(p_objekte, it));
+				p_aktionen.push_back(
+					std::make_unique<VErase<T>>(p_objekte, it));
 			}
 		}
 
@@ -62,13 +63,14 @@ namespace vertagt
 		void push_back(T obj)
 		{
 			// Aktionselement für PushBack auf Liste erzeugen
-			p_aktionen.push_back(std::make_unique<VPushBack<T>>(p_objekte, std::move(obkjekt)));
+			p_aktionen.push_back(
+				std::make_unique<VPushBack<T>>(p_objekte, std::move(obj)));
 		}
 
 		void push_front(T obj)
 		{
 			// Aktionselement für PushBack auf Liste erzeugen
-			p_aktionen.push_front(std::make_unique<VPushBack<T>>(p_objekte, std::move(obkjekt)));
+			p_aktionen.push_front(std::make_unique<VPushBack<T>>(p_objekte, std::move(obj)));
 		}
 
 		void erase(iterator it)

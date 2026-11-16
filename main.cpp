@@ -4,6 +4,7 @@
 #include <string>
 #include <cmath>
 #include <algorithm>
+#include <random>
 #include "Simulationsobjekt.h"
 #include "Weg.h"
 #include "Fahrzeug.h"
@@ -12,6 +13,8 @@
 #include "Fahrausnahme.h"
 #include "SimuClient.h"
 #include "SimuClientSocket.h"
+#include "vertagt_aktion.h"
+#include "vertagt_liste.h"
 
 using namespace std;
 double dEpsilon = 0.001;
@@ -277,6 +280,62 @@ void vAufgabe_6()
     vBeendeGrafik();
 }
 
+void vAufgabe_6a()
+{
+    vertagt::VListe<int> zahlen;
+    std::mt19937 generator(std::random_device{}());
+    std::uniform_int_distribution<int> verteilung(1, 10);
+    for(int i = 0; i<10; ++i)
+    {
+        zahlen.push_back(verteilung(generator));
+    }
+
+    zahlen.vAktualisieren();
+    
+    std::cout << "1. Ursprungliche: \n";
+    for(int zahl : zahlen)
+    {
+        std::cout << zahl << ' ';
+    }
+    std:: cout << "\n";
+
+
+    for(auto it = zahlen.begin(); it != zahlen.end(); ++it)
+    {
+        if(*it > 5)
+        {
+            zahlen.erase(it);
+        }
+    }
+
+    std::cout << "2. nach erase vor aktual. \n";
+    for(int zahl : zahlen)
+    {
+        std::cout << zahl <<  ' '; 
+    }
+    std:: cout << "\n";
+
+    zahlen.vAktualisieren();
+
+    std::cout << "3. nach aktualisieren\n";
+        for(int zahl : zahlen)
+    {
+        std::cout << zahl << ' '; 
+    }
+    std:: cout << "\n";
+
+    zahlen.push_front(1);
+    zahlen.push_back(10);
+    zahlen.vAktualisieren();
+
+    std::cout << "4. mit 1. am Anfang 10 am Ende\n";
+            for(int zahl : zahlen)
+    {
+        std::cout << zahl << ' '; 
+    }
+    std:: cout << "\n";
+}
+
 int main()
 {
     /*
@@ -287,7 +346,8 @@ int main()
     vAufgabe_2();
     vAufgabe_3();
     vAufgabe_4();
+    vAufgabe_6();
     */
-   vAufgabe_6();
+   vAufgabe_6a();
     return 0;
 }
