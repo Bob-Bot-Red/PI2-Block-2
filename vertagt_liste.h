@@ -70,7 +70,8 @@ namespace vertagt
 		void push_front(T obj)
 		{
 			// Aktionselement für PushBack auf Liste erzeugen
-			p_aktionen.push_front(std::make_unique<VPushBack<T>>(p_objekte, std::move(obj)));
+			p_aktionen.push_back(
+				std::make_unique<VPushBack<T>>(p_objekte, std::move(obj)));
 		}
 
 		void erase(iterator it)

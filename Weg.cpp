@@ -21,8 +21,15 @@ Weg::~Weg()
 
 void Weg::vSimulieren()
 {
+    p_pFahrzeuge.vAktualisieren();
+
     for (const auto &Autos : p_pFahrzeuge)
     {
+        if (!Autos)
+        {
+            continue;
+        }
+
         try
         {
             Autos->vSimulieren();
@@ -33,11 +40,12 @@ void Weg::vSimulieren()
         }
         Autos->vZeichnen(*this);
     }
-    for(auto& aktion : p_vAktion)
+    for (auto &aktion : p_vAktion)
     {
         aktion();
     }
     p_vAktion.clear();
+    p_pFahrzeuge.vAktualisieren();
 }
 
 void Weg::vAusgeben(std::ostream &out) const
@@ -107,9 +115,9 @@ double Weg::getLaenge() const
 
 std::unique_ptr<Fahrzeug> Weg::pAbgabe(const Fahrzeug &fahrzeug)
 {
-    for (auto it = p_pFahrzeuge.begin(); it != p_pFahrzeuge.end(); it++)
+    for (auto it = p_pFahrzeuge.begin(); it != p_pFahrzeuge.end(); ++it)
     {
-        if(*it && **it == fahrzeug)
+        if (*it && **it == fahrzeug)
         {
             auto fahrzeugAbgegeben = std::move(*it);
             p_pFahrzeuge.erase(it);

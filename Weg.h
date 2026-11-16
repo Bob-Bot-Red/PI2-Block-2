@@ -4,6 +4,7 @@
 #include "Simulationsobjekt.h"
 #include "Fahrzeug.h"
 #include "Tempolimit.h"
+#include "vertagt_liste.h"
 #include <list>
 #include <memory>
 #include <functional>
@@ -39,7 +40,7 @@ public:
 private:
     double p_dLaenge = 0.0;
     Tempolimit p_eTempolimit;
-    std::list<std::unique_ptr<Fahrzeug>> p_pFahrzeuge;
+    vertagt::VListe<std::unique_ptr<Fahrzeug>> p_pFahrzeuge;
     std::list<std::function<void()>> p_vAktion;
 };
 
