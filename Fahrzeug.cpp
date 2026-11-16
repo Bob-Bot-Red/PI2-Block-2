@@ -110,6 +110,7 @@ void Fahrzeug::vNeueStrecke(Weg &weg)
 
     p_pVerhalten = std::make_unique<Fahren>(weg);
     p_dAbschnittStrecke = 0.0;
+    p_dZeit = dGlobaleZeit;
 }
 
 void Fahrzeug::vNeueStrecke(Weg &weg, double dStartZeitpunkt)
@@ -117,6 +118,7 @@ void Fahrzeug::vNeueStrecke(Weg &weg, double dStartZeitpunkt)
 
     p_pVerhalten = std::make_unique<Parken>(weg, dStartZeitpunkt);
     p_dAbschnittStrecke = 0.0;
+    p_dZeit = dGlobaleZeit;
 }
 
 double Fahrzeug::getAbschnittstrecke() const

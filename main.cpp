@@ -5,6 +5,7 @@
 #include <cmath>
 #include <algorithm>
 #include <random>
+#include <ctime>
 #include "Simulationsobjekt.h"
 #include "Weg.h"
 #include "Fahrzeug.h"
@@ -248,7 +249,7 @@ void vAufgabe_5()
     }
 }
 
-void vAufgabe_6()
+/* void vAufgabe_6()
 {
     Weg Autobahn1("Autobahn1", 500.0, Tempolimit::Autobahn);
     Weg Autobahn2("Autobahn2", 500.0, Tempolimit::Autobahn);
@@ -259,7 +260,7 @@ void vAufgabe_6()
 
     bInitialisiereGrafik(800, 500);
     bZeichneStrasse("Autobahn1", "Autobahn2", 100, 2, koordinaten);
-    
+
     double dZeitschritte = 0.3;
     for (double dZeit = 0.0; dZeit <= 4.5 + dEpsilon; dZeit += dZeitschritte)
     {
@@ -271,13 +272,68 @@ void vAufgabe_6()
         Autobahn1.vSimulieren();
         Autobahn2.vSimulieren();
 
-        //terminal 
+        //terminal
         std::cout << Autobahn1 << "\n" << Autobahn2 << std::endl;
-        Autobahn1.vFahrzeugeAusgeben();        
+        Autobahn1.vFahrzeugeAusgeben();
         Autobahn2.vFahrzeugeAusgeben();
         vSleep(100);
     }
     vBeendeGrafik();
+} */
+
+void vAufgabe_6()
+{
+    for (double dzeitschritt : {0.25, 0.4})
+    {
+        dGlobaleZeit = 0.0;
+        if (!bInitialisiereGrafik(800, 500))
+        {
+            std::cerr << "Grafik kapput \n";
+            return;
+        }
+
+        int koordinaten[] = {700, 250, 100, 250};
+
+        if (!bZeichneStrasse("Stadt", "Autobahn", 500, 2, koordinaten))
+        {
+            std::cerr << "Strasse zeichnen fehlgeschlagen \n";
+            vBeendeGrafik();
+            return;
+        }
+
+        Weg stadt("Stadt", 500.0, Tempolimit::Innerorts);
+        Weg autobahn("Autobahn", 500.0, Tempolimit::Autobahn);
+
+        stadt.vAnnahme(std::make_unique<PKW>("Audi", 120.0, 2.0, 100.0));
+        autobahn.vAnnahme(std::make_unique<PKW>("BMW", 120.0, 2.0, 100.0));
+
+        stadt.vAnnahme(std::make_unique<PKW>("Audi", 100.0, 2.0, 100.0, 3.0),3.0);
+        autobahn.vAnnahme(std::make_unique<PKW>("BMW", 100.0, 2.0, 100.0, 3.0),3.0);
+
+        stadt.vAnnahme(std::make_unique<Fahrrad>("BMX", 40.0));
+
+        std::cout << "\nZeitschritt: " << dzeitschritt;
+
+        for(int schritt = 0; schritt *  dzeitschritt <= 14.0 +dEpsilon; ++schritt)
+        {
+            dGlobaleZeit  = schritt * dzeitschritt;
+            vSetzeZeit(dGlobaleZeit);
+
+            stadt.vSimulieren();
+            autobahn.vSimulieren();
+
+            std::cout << "\nZeit: " << dGlobaleZeit << "h\n";
+
+            Weg::vKopf();
+            std::cout << stadt << "\n" << autobahn << "\n";
+            stadt.vFahrzeugeAusgeben();
+            autobahn.vFahrzeugeAusgeben();
+            
+            vSleep(100);
+        }
+        vBeendeGrafik();
+
+    }
 }
 
 void vAufgabe_6a()
@@ -285,55 +341,54 @@ void vAufgabe_6a()
     vertagt::VListe<int> zahlen;
     std::mt19937 generator(std::random_device{}());
     std::uniform_int_distribution<int> verteilung(1, 10);
-    for(int i = 0; i<10; ++i)
+    for (int i = 0; i < 10; ++i)
     {
         zahlen.push_back(verteilung(generator));
     }
 
     zahlen.vAktualisieren();
-    
+
     std::cout << "1. Ursprungliche: \n";
-    for(int zahl : zahlen)
+    for (int zahl : zahlen)
     {
         std::cout << zahl << ' ';
     }
-    std:: cout << "\n";
+    std::cout << "\n";
 
-
-    for(auto it = zahlen.begin(); it != zahlen.end(); ++it)
+    for (auto it = zahlen.begin(); it != zahlen.end(); ++it)
     {
-        if(*it > 5)
+        if (*it > 5)
         {
             zahlen.erase(it);
         }
     }
 
     std::cout << "2. nach erase vor aktual. \n";
-    for(int zahl : zahlen)
+    for (int zahl : zahlen)
     {
-        std::cout << zahl <<  ' '; 
+        std::cout << zahl << ' ';
     }
-    std:: cout << "\n";
+    std::cout << "\n";
 
     zahlen.vAktualisieren();
 
     std::cout << "3. nach aktualisieren\n";
-        for(int zahl : zahlen)
+    for (int zahl : zahlen)
     {
-        std::cout << zahl << ' '; 
+        std::cout << zahl << ' ';
     }
-    std:: cout << "\n";
+    std::cout << "\n";
 
     zahlen.push_front(1);
     zahlen.push_back(10);
     zahlen.vAktualisieren();
 
     std::cout << "4. mit 1. am Anfang 10 am Ende\n";
-            for(int zahl : zahlen)
+    for (int zahl : zahlen)
     {
-        std::cout << zahl << ' '; 
+        std::cout << zahl << ' ';
     }
-    std:: cout << "\n";
+    std::cout << "\n";
 }
 
 int main()
@@ -348,6 +403,6 @@ int main()
     vAufgabe_4();
     vAufgabe_6();
     */
-   vAufgabe_6a();
+    vAufgabe_6a();
     return 0;
 }

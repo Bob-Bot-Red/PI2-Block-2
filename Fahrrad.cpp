@@ -27,6 +27,10 @@ double Fahrrad::dGeschwindigkeit() const
 
 void Fahrrad::vZeichnen(const Weg &FzgWeg) const
 {
+    if(FzgWeg.getLaenge() <= 0.0)
+    {
+        return;
+    }
     const double dRelPosition = p_dAbschnittStrecke / FzgWeg.getLaenge();
     bZeichnePKW(getName(), FzgWeg.getName(), dRelPosition, dGeschwindigkeit(), 0.0);
 }
