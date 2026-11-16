@@ -2,6 +2,8 @@
 
 #include "vertagt_aktion.h"
 #include <list>
+#include <utility>
+#include <memory>
 
 namespace vertagt
 {
@@ -28,7 +30,10 @@ namespace vertagt
 
 		void clear()
 		{
-			for(p_objekte.)
+			for (auto it = p_objekte.begin(), it != p_objekte.end(); i++)
+			{
+				p_aktionen.push_back(std::make_unique<VErase<T>>(p_objekte, it));
+			}
 		}
 
 		// Lesefunktionen
@@ -38,7 +43,7 @@ namespace vertagt
 		}
 		const_iterator end() const
 		{
-			...
+			return p_objekte.end();
 		}
 		iterator begin()
 		{
@@ -46,40 +51,40 @@ namespace vertagt
 		}
 		iterator end()
 		{
-			...
+			return p_objekte.end();
 		}
 		bool empty() const
 		{
-			...
+			return p_objekte.empty();
 		}
 
 		// Schreibfunktionen
 		void push_back(T obj)
 		{
 			// Aktionselement für PushBack auf Liste erzeugen
-			p_aktionen.push_back(...);
+			p_aktionen.push_back(std::make_unique<VPushBack<T>>(p_objekte, std::move(obkjekt)));
 		}
 
 		void push_front(T obj)
 		{
 			// Aktionselement für PushBack auf Liste erzeugen
-			...
+			p_aktionen.push_front(std::make_unique<VPushBack<T>>(p_objekte, std::move(obkjekt)));
 		}
 
 		void erase(iterator it)
 		{
 			// Aktionselement für PushBack auf Liste erzeugen (hier Iterator statt Objekt !)
-			...
+			p_aktionen.push_back(std::make_unique<VErase<T>>(p_objekte, it));
 		}
 
 		// Änderungen auf Objektliste übertragen
 		void vAktualisieren()
 		{
 			// Änderungen auf Objektliste übertragen
-			for (auto& pAktion : p_aktionen)
+			for (auto &pAktion : p_aktionen)
 			{
 				// Aktion ausführen
-				...
+				pAktion->vAusfuehren();
 			}
 			// Aktionsliste löschen
 			...
