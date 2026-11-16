@@ -249,7 +249,7 @@ void vAufgabe_6()
 {
     Weg Autobahn1("Autobahn1", 500.0, Tempolimit::Autobahn);
     Weg Autobahn2("Autobahn2", 500.0, Tempolimit::Autobahn);
-    Autobahn1.vAnnahme(std::make_unique<PKW>("Audi", 120.0, 6.0));
+    Autobahn1.vAnnahme(std::make_unique<PKW>("Audi", 200.0, 2.0));
     Autobahn2.vAnnahme(std::make_unique<PKW>("Mercedea", 120.0, 6.0));
 
     int koordinaten[] = {700, 250, 100, 250};
@@ -258,7 +258,7 @@ void vAufgabe_6()
     bZeichneStrasse("Autobahn1", "Autobahn2", 100, 2, koordinaten);
     
     double dZeitschritte = 0.3;
-    for (double dZeit = 0.0; dZeit <= 3.0 + dEpsilon; dZeit += dZeitschritte)
+    for (double dZeit = 0.0; dZeit <= 4.5 + dEpsilon; dZeit += dZeitschritte)
     {
         dGlobaleZeit = dZeit;
         vSetzeZeit(dGlobaleZeit);

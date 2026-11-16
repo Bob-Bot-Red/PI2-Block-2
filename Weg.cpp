@@ -25,15 +25,19 @@ void Weg::vSimulieren()
     {
         try
         {
-        Autos->vSimulieren();
+            Autos->vSimulieren();
         }
-        catch(Fahrausnahme& ausnahme)
+        catch (Fahrausnahme &ausnahme)
         {
             ausnahme.vBearbeiten();
         }
         Autos->vZeichnen(*this);
-        
     }
+    for(auto& aktion : p_vAktion)
+    {
+        aktion();
+    }
+    p_vAktion.clear();
 }
 
 void Weg::vAusgeben(std::ostream &out) const
@@ -101,3 +105,16 @@ double Weg::getLaenge() const
     return p_dLaenge;
 }
 
+std::unique_ptr<Fahrzeug> Weg::pAbgabe(const Fahrzeug &fahrzeug)
+{
+    for (auto it = p_pFahrzeuge.begin(); it != p_pFahrzeuge.end(); it++)
+    {
+        if(*it && **it == fahrzeug)
+        {
+            auto fahrzeugAbgegeben = std::move(*it);
+            p_pFahrzeuge.erase(it);
+            return fahrzeugAbgegeben;
+        }
+    }
+    return nullptr;
+}

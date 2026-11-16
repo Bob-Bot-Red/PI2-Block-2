@@ -6,6 +6,8 @@
 #include "Tempolimit.h"
 #include <list>
 #include <memory>
+#include <functional>
+#include <utility>
 
 class Fahrzeug;
 
@@ -25,10 +27,20 @@ public:
     void vFahrzeugeAusgeben() const;
     double getLaenge() const;
     double getTempolimit() const;
+
+    std::unique_ptr<Fahrzeug> pAbgabe(const Fahrzeug &fahrzeug);
+
+    template <typename Aktion>
+    void vVerzoegert(Aktion &&aktion)
+    {
+        p_vAktion.emplace_back(std::forward<Aktion>(aktion));
+    }
+
 private:
     double p_dLaenge = 0.0;
     Tempolimit p_eTempolimit;
     std::list<std::unique_ptr<Fahrzeug>> p_pFahrzeuge;
+    std::list<std::function<void()>> p_vAktion;
 };
 
 #endif

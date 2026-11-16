@@ -4,12 +4,27 @@
 #include <iostream>
 
 Losfahren::Losfahren(Fahrzeug &fahrzeug, Weg &weg)
-:Fahrausnahme(fahrzeug, weg)
+    : Fahrausnahme(fahrzeug, weg)
 {
 }
 
 void Losfahren::vBearbeiten()
 {
-    std::cout << "Losfahren: Fahrzeug " << p_pFahrzeug.getName() 
-    << " auf Weg " << p_pWeg.getName() << std::endl;
+    std::cout << "Losfahren: Fahrzeug " << p_pFahrzeug.getName()
+              << " auf Weg " << p_pWeg.getName() << std::endl;
+    Fahrzeug *pfahrzeug = &p_pFahrzeug;
+    Weg *pWeg = &p_pWeg;
+
+    p_pWeg.vVerzoegert
+    (
+        [pfahrzeug, pWeg]()
+        {
+            auto pAbgegebenesFahrzeug = pWeg->pAbgabe(*pfahrzeug);
+
+            if(pAbgegebenesFahrzeug)
+            {
+                pWeg->vAnnahme(std::move(pAbgegebenesFahrzeug));
+            }
+        }
+    );
 }
