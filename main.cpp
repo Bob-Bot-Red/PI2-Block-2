@@ -214,10 +214,9 @@ void vAufgabe_3()
 
 void vAufgabe_4()
 {
-    Weg::vKopf();
     Weg erster("Name", 22.0, Tempolimit::Autobahn);
-    erster.vSimulieren();
-    std::cout << 0;
+    Weg::vKopf();
+    std::cout << erster << '\n';
 }
 
 void vAufgabe_5()
@@ -249,7 +248,8 @@ void vAufgabe_5()
     }
 }
 
-/* void vAufgabe_6()
+/* 
+void vAufgabe_6()
 {
     Weg Autobahn1("Autobahn1", 500.0, Tempolimit::Autobahn);
     Weg Autobahn2("Autobahn2", 500.0, Tempolimit::Autobahn);
@@ -283,7 +283,7 @@ void vAufgabe_5()
 
 void vAufgabe_6()
 {
-    for (double dzeitschritt : {0.25, 0.4})
+    for (double dzeitschritt : {0.25, 0.3})
     {
         dGlobaleZeit = 0.0;
         if (!bInitialisiereGrafik(800, 500))
@@ -307,8 +307,8 @@ void vAufgabe_6()
         stadt.vAnnahme(std::make_unique<PKW>("Audi", 120.0, 2.0, 100.0));
         autobahn.vAnnahme(std::make_unique<PKW>("BMW", 120.0, 2.0, 100.0));
 
-        stadt.vAnnahme(std::make_unique<PKW>("Audi", 100.0, 2.0, 100.0, 3.0),3.0);
-        autobahn.vAnnahme(std::make_unique<PKW>("BMW", 100.0, 2.0, 100.0, 3.0),3.0);
+        stadt.vAnnahme(std::make_unique<PKW>("Audi", 100.0, 2.0, 100.0),3.0);
+        autobahn.vAnnahme(std::make_unique<PKW>("BMW", 100.0, 2.0, 100.0),3.0);
 
         stadt.vAnnahme(std::make_unique<Fahrrad>("BMX", 40.0));
 
@@ -339,11 +339,14 @@ void vAufgabe_6()
 void vAufgabe_6a()
 {
     vertagt::VListe<int> zahlen;
-    std::mt19937 generator(std::random_device{}());
-    std::uniform_int_distribution<int> verteilung(1, 10);
+constexpr unsigned int seed =
+    (__DATE__[9] - '0') * 10 + (__DATE__[10] - '0');
+    static std::mt19937 device(seed);
+    std::uniform_int_distribution<int> dist(1, 10);
     for (int i = 0; i < 10; ++i)
     {
-        zahlen.push_back(verteilung(generator));
+        int zuf = dist(device);
+        zahlen.push_back(zuf);
     }
 
     zahlen.vAktualisieren();

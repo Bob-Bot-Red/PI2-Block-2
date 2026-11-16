@@ -30,11 +30,13 @@ namespace vertagt
 
 		void clear()
 		{
-			for (auto it = p_objekte.begin(); it != p_objekte.end(); ++it)
-			{
-				p_aktionen.push_back(
-					std::make_unique<VErase<T>>(p_objekte, it));
-			}
+			vAktualisieren();
+			p_objekte.clear();
+			/* 			for (auto it = p_objekte.begin(); it != p_objekte.end(); ++it)
+						{
+							p_aktionen.push_back(
+								std::make_unique<VErase<T>>(p_objekte, it));
+						} */
 		}
 
 		// Lesefunktionen
@@ -77,7 +79,7 @@ namespace vertagt
 		void erase(iterator it)
 		{
 			// Aktionselement für PushBack auf Liste erzeugen (hier Iterator statt Objekt !)
-			if(it != p_objekte.end())
+			if (it != p_objekte.end())
 			{
 				p_aktionen.push_back(std::make_unique<VErase<T>>(p_objekte, it));
 			}

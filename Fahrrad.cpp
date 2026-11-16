@@ -32,5 +32,5 @@ void Fahrrad::vZeichnen(const Weg &FzgWeg) const
         return;
     }
     const double dRelPosition = p_dAbschnittStrecke / FzgWeg.getLaenge();
-    bZeichnePKW(getName(), FzgWeg.getName(), dRelPosition, dGeschwindigkeit(), 0.0);
+    bZeichneFahrrad(getName(), FzgWeg.getName(), dRelPosition, dGeschwindigkeit());
 }
