@@ -248,7 +248,7 @@ void vAufgabe_5()
     }
 }
 
-/* 
+/*
 void vAufgabe_6()
 {
     Weg Autobahn1("Autobahn1", 500.0, Tempolimit::Autobahn);
@@ -304,19 +304,29 @@ void vAufgabe_6()
         Weg stadt("Stadt", 500.0, Tempolimit::Innerorts);
         Weg autobahn("Autobahn", 500.0, Tempolimit::Autobahn);
 
-        stadt.vAnnahme(std::make_unique<PKW>("Audi", 120.0, 2.0, 100.0));
-        autobahn.vAnnahme(std::make_unique<PKW>("BMW", 120.0, 2.0, 100.0));
+        // Sofort fahrende Fahrzeuge
+        stadt.vAnnahme(
+            std::make_unique<PKW>("Audi", 120.0, 2.0, 100.0));
 
-        stadt.vAnnahme(std::make_unique<PKW>("Audi", 100.0, 2.0, 100.0),3.0);
-        autobahn.vAnnahme(std::make_unique<PKW>("BMW", 100.0, 2.0, 100.0),3.0);
+        autobahn.vAnnahme(
+            std::make_unique<PKW>("BMW", 120.0, 2.0, 100.0));
+
+        // Zunächst parkende Fahrzeuge
+        stadt.vAnnahme(
+            std::make_unique<PKW>("VW", 100.0, 2.0, 100.0),
+            3.0);
+
+        autobahn.vAnnahme(
+            std::make_unique<PKW>("Opel", 100.0, 2.0, 100.0),
+            3.0);
 
         stadt.vAnnahme(std::make_unique<Fahrrad>("BMX", 40.0));
 
         std::cout << "\nZeitschritt: " << dzeitschritt;
 
-        for(int schritt = 0; schritt *  dzeitschritt <= 14.0 +dEpsilon; ++schritt)
+        for (int schritt = 0; schritt * dzeitschritt <= 14.0 + dEpsilon; ++schritt)
         {
-            dGlobaleZeit  = schritt * dzeitschritt;
+            dGlobaleZeit = schritt * dzeitschritt;
             vSetzeZeit(dGlobaleZeit);
 
             stadt.vSimulieren();
@@ -325,22 +335,22 @@ void vAufgabe_6()
             std::cout << "\nZeit: " << dGlobaleZeit << "h\n";
 
             Weg::vKopf();
-            std::cout << stadt << "\n" << autobahn << "\n";
+            std::cout << stadt << "\n"
+                      << autobahn << "\n";
             stadt.vFahrzeugeAusgeben();
             autobahn.vFahrzeugeAusgeben();
-            
+
             vSleep(100);
         }
         vBeendeGrafik();
-
     }
 }
 
 void vAufgabe_6a()
 {
     vertagt::VListe<int> zahlen;
-constexpr unsigned int seed =
-    (__DATE__[9] - '0') * 10 + (__DATE__[10] - '0');
+    constexpr unsigned int seed =
+        (__DATE__[9] - '0') * 10 + (__DATE__[10] - '0');
     static std::mt19937 device(seed);
     std::uniform_int_distribution<int> dist(1, 10);
     for (int i = 0; i < 10; ++i)
@@ -405,7 +415,7 @@ int main()
     vAufgabe_3();
     vAufgabe_4();
     */
-   vAufgabe_6();
+    vAufgabe_6();
     vAufgabe_6a();
     return 0;
 }
