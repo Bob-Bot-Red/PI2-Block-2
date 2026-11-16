@@ -404,8 +404,8 @@ int main()
     vAufgabe_2();
     vAufgabe_3();
     vAufgabe_4();
-    vAufgabe_6();
     */
+   vAufgabe_6();
     vAufgabe_6a();
     return 0;
 }
