@@ -14,7 +14,7 @@ namespace vertagt
 
 	public:
 	    VAktion() = delete; // Benötigt man einen Standardkonstruktor?
-		VAktion(std::list<T>& ptListe) : p_pListe(ptListe){}
+		explicit VAktion(std::list<T>& ptListe) : p_pListe(ptListe){}
 		virtual ~VAktion() = default;
 		virtual void vAusfuehren() = 0;
 	};
@@ -29,7 +29,6 @@ namespace vertagt
 	public:
 	    VPushBack() = delete;
 		VPushBack(std::list<T>& liste, T obj) : VAktion<T>(liste), p_objekt(std::move(obj))	{
-			p_objekt
 		}
 		virtual ~VPushBack() = default;
 		void vAusfuehren() override
@@ -48,12 +47,11 @@ namespace vertagt
 	public:
 	    VPushFront() = delete;
 		VPushFront(std::list<T>& liste, T obj) : VAktion<T>(liste), p_objekt(std::move(obj))	{
-			p_objekt
 		}
 		virtual ~VPushFront() = default;
 		void vAusfuehren() override
 		{
-			VAktion<T>::p_pListe.push_front(std::move(p_objekt));
+			this->p_pListe.push_front(std::move(p_objekt));
 		}
 	};
 
@@ -73,7 +71,7 @@ namespace vertagt
 		virtual ~VErase() = default;
 		void vAusfuehren() override
 		{
-			VAktion<T>::p_pListe.erase(p_it);
+			this->p_pListe.erase(p_it);
 		}
 	};
 }  // namespace vertagt
