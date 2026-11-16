@@ -265,7 +265,7 @@ void vAufgabe_6()
         std::cerr << "Grafikserver nicht erreichbar. Simulation laeuft im Terminal.\n";
     }
 
-    for (double dZeitschritt : {0.25, 0.3})
+    for (double dZeitschritt : {0.25})
     {
         Weg stadt("Stadt", iWeglaenge, Tempolimit::Innerorts);
         Weg autobahn("Autobahn", iWeglaenge);
@@ -279,7 +279,7 @@ void vAufgabe_6()
 
         // Bei 50 km/h braucht der Audi 10 h für 500 km.
         // Bis 10.5 h sieht man auch die Meldung im Folgeschritt.
-        for (dGlobaleZeit = 0.0; dGlobaleZeit <= 10.5 + 1e-9;
+        for (dGlobaleZeit = 0.0; dGlobaleZeit <= 5 + 1e-9;
              dGlobaleZeit += dZeitschritt)
         {
             std::cout << "\n===== Zeit " << dGlobaleZeit << " h =====\n";
@@ -304,7 +304,7 @@ void vAufgabe_6()
 
             if (bGrafikAktiv)
             {
-                vSleep(100);
+                vSleep(300);
             }
         }
     }
@@ -320,25 +320,34 @@ void vZwischendurchtest()
     Weg Autobahn1("Autobahn1", 200.0, Tempolimit::Autobahn);
     Weg Autobahn2("Autobahn2", 200.0, Tempolimit::Autobahn);
     Autobahn1.vAnnahme(std::make_unique<PKW>("Audi", 120.0, 6.0));
-    Autobahn2.vAnnahme(std::make_unique<PKW>("BMW", 120.0, 6.0));
+    Autobahn2.vAnnahme(std::make_unique<PKW>("Mercedea", 120.0, 6.0));
+
+    int koordinaten[] = {700, 250, 100, 250};
 
     bInitialisiereGrafik(800, 500);
-    int koordinaten[] = {700, 250, 100, 250};
     bZeichneStrasse("Autobahn1", "Autobahn2", 100, 2, koordinaten);
+
+
     double dZeitschritte = 0.3;
-    for (double dZeit = 0.0; dZeit <= 10.0 + dEpsilon; dZeit += dZeitschritte)
+
+    bZeichnePKW("Audi", "Autobahn1", 0.5, 120, 55);
+    bZeichnePKW("Mercedes", "Autobahn2", 0.5, 120, 55);
+
+    for (double dZeit = 0.0; dZeit <= 5.0 + dEpsilon; dZeit += dZeitschritte)
     {
         dGlobaleZeit = dZeit;
         vSetzeZeit(dGlobaleZeit);
+        Weg::vKopf();
         Autobahn1.vSimulieren();
         Autobahn2.vSimulieren();
-        Weg::vKopf();
+        //graphik
+        Autobahn1.p_pFahrzeuge;
+
+        //terminal 
         std::cout << Autobahn1 << "\n" << Autobahn2 << std::endl;
-        bZeichnePKW("Audi", "Autobahn1", 0.5, 120, 55);
         Autobahn1.vFahrzeugeAusgeben();        
-        bZeichnePKW("BMW", "Autobahn2", 0.5, 120, 55);
         Autobahn2.vFahrzeugeAusgeben();
-        vSleep(100);
+        vSleep(300);
     }
     vBeendeGrafik();
 }

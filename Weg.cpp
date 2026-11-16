@@ -31,6 +31,7 @@ void Weg::vSimulieren()
         {
             ausnahme.vBearbeiten();
         }
+        
     }
 }
 

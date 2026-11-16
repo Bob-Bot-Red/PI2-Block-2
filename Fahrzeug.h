@@ -29,7 +29,7 @@ public:
     void vNeueStrecke(Weg &Weg);
     void vNeueStrecke(Weg &Weg, double dStartZeitpunkt);
     double getAbschnittstrecke() const;
-    virtual void vZeichnen(Weg &FzgWeg) = 0;
+    virtual void vZeichnen(const Weg &FzgWeg) const;
 
 
 protected:

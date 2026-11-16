@@ -123,3 +123,7 @@ double Fahrzeug::getAbschnittstrecke() const
 {
     return p_dAbschnittStrecke;
 }
+
+void Fahrzeug::vZeichnen(const Weg &FzgWeg) const
+{
+}

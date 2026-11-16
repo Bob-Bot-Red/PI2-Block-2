@@ -11,7 +11,7 @@ public:
     Fahrrad(const std::string &sName, const double dMaxGeschwindkeit);
     virtual ~Fahrrad();
     double dGeschwindigkeit() const override;
-
+void vZeichnen(const Weg &FzgWeg) const override;
 private:
 };
 

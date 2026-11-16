@@ -1,6 +1,8 @@
 #include "Fahrrad.h"
 #include <cmath>
 #include <algorithm>
+#include "Weg.h"
+#include "SimuClient.h"
 
 Fahrrad::Fahrrad() : Fahrzeug()
 {
@@ -21,4 +23,10 @@ double Fahrrad::dGeschwindigkeit() const
     double dGeschwindigkeit = p_dMaxGeschwindigkeit * std::pow(0.9, iAbschnitte);
     return std::min(p_dMaxGeschwindigkeit, std::max(12.0, dGeschwindigkeit)); //max, gibt größter Wert(wenn 12 dann anderer zu niederig), dann das kleinsten der Werten
 
+}
+
+void Fahrrad::vZeichnen(const Weg &FzgWeg) const
+{
+    const double dRelPosition = p_dAbschnittStrecke / FzgWeg.getLaenge();
+    bZeichnePKW(getName(), FzgWeg.getName(), dRelPosition, dGeschwindigkeit(), 0.0);
 }
