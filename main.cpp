@@ -11,6 +11,7 @@
 #include "Fahrrad.h"
 #include "Fahrausnahme.h"
 #include "SimuClient.h"
+#include "SimuClientSocket.h"
 
 using namespace std;
 double dEpsilon = 0.001;
@@ -246,79 +247,8 @@ void vAufgabe_5()
 
 void vAufgabe_6()
 {
-    constexpr int iWeglaenge = 500;
-    int koordinaten[] = {700, 250, 100, 250};
-
-    bool bGrafikAktiv = bInitialisiereGrafik(800, 500);
-
-    if (bGrafikAktiv)
-    {
-        if (!bZeichneStrasse("Stadt", "Autobahn", iWeglaenge, 2, koordinaten))
-        {
-            std::cerr << "Die Strasse konnte nicht gezeichnet werden.\n";
-            vBeendeGrafik();
-            bGrafikAktiv = false;
-        }
-    }
-    else
-    {
-        std::cerr << "Grafikserver nicht erreichbar. Simulation laeuft im Terminal.\n";
-    }
-
-    for (double dZeitschritt : {0.25})
-    {
-        Weg stadt("Stadt", iWeglaenge, Tempolimit::Innerorts);
-        Weg autobahn("Autobahn", iWeglaenge);
-
-        stadt.vAnnahme(std::make_unique<PKW>("Audi", 120.0, 6.0));
-        autobahn.vAnnahme(std::make_unique<PKW>("BMW", 120.0, 6.0));
-        stadt.vAnnahme(std::make_unique<PKW>("VW", 100.0, 5.0), 3.0);
-        autobahn.vAnnahme(std::make_unique<PKW>("Opel", 100.0, 5.0), 3.0);
-
-        std::cout << "\nZeittakt " << dZeitschritt << " h\n";
-
-        // Bei 50 km/h braucht der Audi 10 h für 500 km.
-        // Bis 10.5 h sieht man auch die Meldung im Folgeschritt.
-        for (dGlobaleZeit = 0.0; dGlobaleZeit <= 5 + 1e-9;
-             dGlobaleZeit += dZeitschritt)
-        {
-            std::cout << "\n===== Zeit " << dGlobaleZeit << " h =====\n";
-
-            if (bGrafikAktiv)
-            {
-                vSetzeZeit(dGlobaleZeit);
-            }
-
-            stadt.vSimulieren();
-            autobahn.vSimulieren();
-
-            Weg::vKopf();
-            std::cout << stadt << '\n'
-                      << autobahn << '\n';
-
-            std::cout << "\nFahrzeuge auf Stadt\n";
-            stadt.vFahrzeugeAusgeben();
-
-            std::cout << "\nFahrzeuge auf Autobahn\n";
-            autobahn.vFahrzeugeAusgeben();
-
-            if (bGrafikAktiv)
-            {
-                vSleep(300);
-            }
-        }
-    }
-
-    if (bGrafikAktiv)
-    {
-        vBeendeGrafik();
-    }
-}
-
-void vZwischendurchtest()
-{
-    Weg Autobahn1("Autobahn1", 200.0, Tempolimit::Autobahn);
-    Weg Autobahn2("Autobahn2", 200.0, Tempolimit::Autobahn);
+    Weg Autobahn1("Autobahn1", 500.0, Tempolimit::Autobahn);
+    Weg Autobahn2("Autobahn2", 500.0, Tempolimit::Autobahn);
     Autobahn1.vAnnahme(std::make_unique<PKW>("Audi", 120.0, 6.0));
     Autobahn2.vAnnahme(std::make_unique<PKW>("Mercedea", 120.0, 6.0));
 
@@ -326,28 +256,23 @@ void vZwischendurchtest()
 
     bInitialisiereGrafik(800, 500);
     bZeichneStrasse("Autobahn1", "Autobahn2", 100, 2, koordinaten);
-
-
+    
     double dZeitschritte = 0.3;
-
-    bZeichnePKW("Audi", "Autobahn1", 0.5, 120, 55);
-    bZeichnePKW("Mercedes", "Autobahn2", 0.5, 120, 55);
-
-    for (double dZeit = 0.0; dZeit <= 5.0 + dEpsilon; dZeit += dZeitschritte)
+    for (double dZeit = 0.0; dZeit <= 3.0 + dEpsilon; dZeit += dZeitschritte)
     {
         dGlobaleZeit = dZeit;
         vSetzeZeit(dGlobaleZeit);
         Weg::vKopf();
+
+        //simulieren + zeichnen
         Autobahn1.vSimulieren();
         Autobahn2.vSimulieren();
-        //graphik
-        Autobahn1.p_pFahrzeuge;
 
         //terminal 
         std::cout << Autobahn1 << "\n" << Autobahn2 << std::endl;
         Autobahn1.vFahrzeugeAusgeben();        
         Autobahn2.vFahrzeugeAusgeben();
-        vSleep(300);
+        vSleep(100);
     }
     vBeendeGrafik();
 }
@@ -362,8 +287,7 @@ int main()
     vAufgabe_2();
     vAufgabe_3();
     vAufgabe_4();
-    vAufgabe_6();
     */
-   vZwischendurchtest();
+   vAufgabe_6();
     return 0;
 }
