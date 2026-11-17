@@ -20,7 +20,7 @@ double Fahren::dStrecke(Fahrzeug &aFzg, double dZeitIntervall) const
 
     if(dMoeglicheStrecke >= dRest)
     {
-        return dRest;
+            return dRest;
     }
     return dMoeglicheStrecke;
 }
