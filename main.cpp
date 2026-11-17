@@ -228,6 +228,7 @@ void vAufgabe_5()
         Autobahn1.vAnnahme(std::make_unique<PKW>("Audi", 80.0, 6.0));
         Autobahn1.vAnnahme(std::make_unique<PKW>("Mercedes", 100.0, 68.0));
         Autobahn1.vAnnahme(std::make_unique<Fahrrad>("lol", 35.0));
+        Autobahn1.vAnnahme(std::make_unique<PKW>("Parkend", 100.0, 5.0),1.5);
 
         for (int i = 0; i < 3; i++)
         {
@@ -407,15 +408,15 @@ void vAufgabe_6a()
 int main()
 {
     /*
-    vAufgabe_5();
     vAufgabe_1();
     vAufgabe_1a();
     vAufgabe_AB1();
     vAufgabe_2();
-    vAufgabe_3();
     vAufgabe_4();
-    */
-    vAufgabe_6();
+    vAufgabe_3();
+    vAufgabe_5();
     vAufgabe_6a();
+    */
+   vAufgabe_6();
     return 0;
 }
